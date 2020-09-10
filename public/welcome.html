@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>FRAT Launch</title>
+	<meta name="description" content="3D classrooms,smart attendance, quizzes and whiteboard.">
+	<meta name="keywords"
+		content="webgl, three.js, 3d, objects, exploding, shatter, fragment, animation, template, javascript" />
+	<meta name="author" content="Codrops" />
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="stylesheet" href="https://use.typekit.net/ldt4auk.css">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700" />
+	<link rel="stylesheet" href="https://raubarrera.neocities.org/cdpn/style.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link rel="stylesheet" href="./styles/timestyle.css">
+
+	<script>document.documentElement.className = "js"; var supportsCssVars = function () { var e, t = document.createElement("style"); return t.innerHTML = "root: { --tmp-var: bold; }", document.head.appendChild(t), e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)")), t.parentNode.removeChild(t), e }; supportsCssVars() || alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
+	<style>
+		@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+		html {
+			height: 90%;
+		}
+
+		body {
+			background: #3f485b;
+			display: flex;
+			align-items: center;
+			height: 90%;
+		}
+
+		.back {
+			margin: 1em auto;
+			font-family: "Roboto";
+		}
+
+		.back span {
+			font-size: 3em;
+			color: #f2c640;
+			background: #262b37;
+			display: table-cell;
+			box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3), 0 5px 0 #ccc;
+			padding: 0 15px;
+			line-height: 100px;
+			animation: jumb 2s infinite;
+		}
+
+		@keyframes jumb {
+			0% {
+				transform: translateY(0px);
+			}
+
+			50% {
+				transform: translateY(-30px);
+				box-shadow: 0 15px 0 rgb(242, 198, 64);
+			}
+
+			100% {
+				transform: translateY(0px);
+			}
+		}
+
+		.back span:nth-child(1) {
+			animation-delay: 0s;
+		}
+
+		.back span:nth-child(2) {
+			animation-delay: 0.1s;
+		}
+
+		.back span:nth-child(3) {
+			animation-delay: 0.2s;
+		}
+
+		.back span:nth-child(4) {
+			animation-delay: 0.3s;
+		}
+
+		.back span:nth-child(5) {
+			animation-delay: 0.4s;
+		}
+
+		.back span:nth-child(6) {
+			animation-delay: 0.5s;
+		}
+
+		.back span:nth-child(7) {
+			animation-delay: 0.6s;
+		}
+
+		.frat {
+			font-family: "Bungee Inline", Arial, Helvetica, sans-serif !important;
+		}
+
+		.weight {
+			font-weight: lighter;
+		}
+
+		body {
+			overflow: hidden !important;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+</head>
+
+<body class="demo-4" style="overflow:hidden !important;">
+	<div id="loading">
+		<span class="back">
+			<span>L</span>
+			<span>o</span>
+			<span>a</span>
+			<span>d</span>
+			<span>i</span>
+			<span>n</span>
+			<span>g</span>
+		</span>
+	</div>
+	<div style="display:none" id="content-form">
+		<section id="cart-section">
+			<div class="container">
+				<div class="row">
+					<div class="cart cart3">
+						<div style="z-index: 1;" class="column">
+							<h2 id="h2"><span class="frat weight">FRAT</span><span>Launch</span></h2>
+
+							<div onclick="myTeacher()" id="teacher" class="button-area column">
+								<button id="teach-button" value="teacher">Teacher</button>
+							</div>
+							<div onclick="myCheckbox()" id="student" class="button-area column">
+								<button id="student-button" value="student">Student</button>
+							</div>
+							<div onclick="myGuest()" id="guest" class="button-area column">
+								<button id="guest-button" value="guest">Guest</button>
+							</div>
+							<div class="log-in-area column">
+								<div style="display: none;padding-top: 40px;" id="dopdown">
+									<div class="select">
+										<select name="slct" id="slctyear">
+											<option selected disabled>Year</option>
+											<option value="17">17</option>
+											<option value="18">18</option>
+											<option value="19">19</option>
+										</select>
+									</div>
+									<br />
+									<div class="select">
+										<select name="slct" id="slctgroup">
+											<option selected disabled>Group</option>
+											<option value="CSE">CSE</option>
+											<option value="EEE">EEE</option>
+											<option value="MECH">MECH</option>
+											<option value="CIVIL">CIVIL</option>
+										</select>
+									</div>
+									<label
+										style="text-align: center;align-items: center;align-self: center;align-content: center; "
+										class="column" for=""> Name
+										<input type="text" id="urname" value="">
+									</label>
+									<label
+										style="text-align: center;align-items: center;align-self: center;align-content: center; "
+										class="column" for=""> Roll Number
+										<input type="text" id="rolno" value="">
+									</label>
+								</div>
+							</div>
+							<div onclick="myfunc()"
+								style=" text-align: center;align-items: center;align-self: center;align-content: center;display: none;"
+								id="lets" class="button-area column">
+								<button>Let's Go</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<main id="main" style="display: none;">
+		<button style="z-index: 45641654865486548654685468548;position: fixed;top:50%; display: none;"
+			onclick="playUtube()" id="playButtonID" class="btn btn-primary btn-lg">Play</button>
+		<div id="container"> </div>
+		<div class="frame">
+		</div><!-- /frame -->
+		<div class="content">
+			<div class="content__item">
+				<button style="display:none" id="take" class="content__button">Take me in</button>
+			</div>
+			<div class="content__item content__item--details">
+				<h3 class="content__location">Mahindra University's</h3>
+				<h1 style="color:white" class="content__title frat weight">FRAT</h1>
+				<p style="color:white" class="content__date">Launch</p>
+			</div>
+			<div class="content__item content__item--details">
+				<div class="content__inner">
+					<div class="content__inner-item" id="player"></div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<script src="js/brain.js"></script>
+	<script src="js/TweenMax.min.js"></script>
+	<script src="js/charming.min.js"></script>
+	<script src="js/demo4.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+	<script>
+		window.onload = function () {
+			document.getElementById("content-form").style.display = "block";
+			document.getElementById("loading").style.display = "none";
+		}
+		var globalEvent;
+		var tag = document.createElement('script');
+
+		tag.src = "https://www.youtube.com/iframe_api";
+		var firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+		// 3. This function creates an <iframe> (and YouTube player)
+		//    after the API code downloads.
+		var player;
+		var width = window.innerWidth;
+		var height = screen.height;
+		function onYouTubeIframeAPIReady() {
+			player = new YT.Player('player', {
+				height: height,
+				width: width,
+				videoId: '4LaHaThEQho',
+				controls: 0,
+				events: {
+					'onReady': onPlayerReady,
+					'onStateChange': onPlayerStateChange
+				}
+			});
+		}
+
+		// 4. The API will call this function when the video player is ready.
+		function onPlayerReady(event) {
+			globalEvent = event;
+		}
+
+		// 5. The API calls this function when the player's state changes.
+		//    The function indicates that when playing a video (state=1),
+		//    the player should play for six seconds and then stop.
+		function onPlayerStateChange(event) {
+			if (event.data == YT.PlayerState.ENDED) {
+				studentRedirectBasedOnValuesGiven();
+			}
+			if (event.data == YT.PlayerState.PLAYING) {
+				document.getElementById("playButtonID").style.display = "none"
+			}
+		}
+		function stopVideo() {
+			player.stopVideo();
+		}
+
+		function myTeacher() {
+			document.getElementById("main").style.display = "block";
+			document.getElementById("content-form").style.display = "none";
+			setTimeout(() => {
+				document.getElementById("take").click();
+			}, 2000);
+			setTimeout(() => {
+				document.querySelector(".frame").style.display = 'none';
+				document.getElementById("playButtonID").style.display = "block"
+				globalEvent.target.playVideo();
+			}, 7000);
+			var username = document.getElementById("teach-button").value;
+			if (localStorage) {
+				localStorage.setItem('user', username);
+			}
+			console.log("username is", username);
+		}
+		function myGuest() {
+			document.getElementById("main").style.display = "block";
+			document.getElementById("content-form").style.display = "none";
+			setTimeout(() => {
+				document.getElementById("take").click();
+			}, 2000);
+			setTimeout(() => {
+				document.querySelector(".frame").style.display = 'none';
+				document.getElementById("playButtonID").style.display = "block"
+				globalEvent.target.playVideo();
+			}, 7000);
+			var username = document.getElementById("guest-button").value;
+			if (localStorage) {
+				localStorage.setItem('user', username);
+			}
+			console.log("username is", username);
+		}
+		function playUtube() {
+			console.log("efefewfcfw")
+			document.querySelector(".frame").style.display = 'none';
+			globalEvent.target.playVideo();
+		}
+		function myCheckbox() {
+			console.log("student clicked");
+			document.getElementById("teacher").style.display = "none";
+			document.getElementById("guest").style.display = "none";
+			document.getElementById("student").style.display = "none";
+			document.getElementById("h2").style.display = "none";
+			document.getElementById("dopdown").style.display = "block";
+			document.getElementById("lets").style.display = "block";
+			var username = document.getElementById("student-button").value;
+			if (localStorage) {
+				localStorage.setItem('user', username);
+			}
+			console.log("username is", username);
+		}
+		function myfunc() {
+			console.log("entered");
+			document.getElementById("main").style.display = "block";
+			document.getElementById("content-form").style.display = "none";
+			setTimeout(() => {
+				document.getElementById("take").click();
+			}, 2000);
+			setTimeout(() => {
+				document.querySelector(".frame").style.display = 'none';
+				document.getElementById("playButtonID").style.display = "block"
+				globalEvent.target.playVideo();
+			}, 7000);
+			var years = document.getElementById("slctyear");
+			var groups = document.getElementById("slctgroup");
+			var urname = document.getElementById("urname").value;
+			var rolno = document.getElementById("rolno").value;
+			var year = years.value;
+			var group = groups.value;
+			if (localStorage) {
+				localStorage.setItem('year', year);
+				localStorage.setItem('group', group);
+				localStorage.setItem('name', urname);
+				localStorage.setItem('rollno', rolno);
+
+			}
+			console.log("year selected", typeof (year));
+			console.log("group selected", group);
+			console.log("urname filled", urname);
+			console.log("rolno filled", rolno);
+		}
+		function studentRedirectBasedOnValuesGiven() {
+			var user = localStorage.getItem("user");
+			var link;
+			if (user === "student") {
+				var year = localStorage.getItem("year");
+				var group = localStorage.getItem("group");
+				var name = localStorage.getItem("name");
+				var rollno = localStorage.getItem("rollno");
+
+				if (year === "17") {
+					if (group === "CSE") {
+						link = "https://class.frat.team?r=CfitnGFH0U0nsL7ZHShI&c=class&w=0cECn5vzabI3oLp82e4ioOHUFfCgWSxeAvyV5Uluc2H426bK3Zk1BHPwDzs1mp1OFq2I7JmA&j=0cECn5vzabI3oLp82e4ioOHUFfCgWSxeAvyV5Uluc2H426bK3Zk1BHPwDzs1mp1OFq2I7JmA&u=" + name + "&roll=" + rollno;
+						window.location.replace(link);
+					}
+
+					else if (group === "EEE") {
+						link = "https://class.frat.team?r=ZgxtUxOBWl8jro8YjLkn&c=class&w=9E0p6fJCudKXOizyN7mKhibf7MOKQzR3RHE2YsSURqOXvBJmvLwZvjtjGrGnpZ86Trj5MhF7&j=9E0p6fJCudKXOizyN7mKhibf7MOKQzR3RHE2YsSURqOXvBJmvLwZvjtjGrGnpZ86Trj5MhF7&u=" + name + "&roll=" + rollno;
+						window.location.replace(link);
+					}
+					else if (group === "CIVIL") {
+						link = "https://class.frat.team?r=b06Qrsk8y52CtQgFG6iB&c=class&w=ASi2tX0DymazRnhquG8n4YxHK6qqrl8haiIympQzZK75QLLhS8HI2HgQo8V7lTGX3eiYI8vq&j=ASi2tX0DymazRnhquG8n4YxHK6qqrl8haiIympQzZK75QLLhS8HI2HgQo8V7lTGX3eiYI8vq&u=" + name + "&roll=" + rollno;
+						window.location.replace(link);
+					}
+					else if (group === "MECH") {
+						link = "https://class.frat.team?r=zzKYXkNyXe1XDbvVnDze&c=class&w=9J764aGZG4XFtNayfyM7cKzKKCZQY15FyIfIMrA6IqqyXpZ79uilR1dKOJJeNJLEQrnOCqk8&j=9J764aGZG4XFtNayfyM7cKzKKCZQY15FyIfIMrA6IqqyXpZ79uilR1dKOJJeNJLEQrnOCqk8&u=" + name + "&roll=" + rollno;
+						window.location.replace(link);
+					}
+					else {
+						window.location.replace("https://class.frat.team");
+					}
+				}
+				else if (year === "18") {
+					if (group === "CSE") {
+						link = "https://class.frat.team?r=gmsyuevb09swCcxuYJ8q&c=class&w=bXTlgrpLM6Ah2WX3ObrnA7P3hB48VQDTwrTHJ2Vfb8yQQtyjrLoDD9nCH17WltKC2qD9XnAV&j=bXTlgrpLM6Ah2WX3ObrnA7P3hB48VQDTwrTHJ2Vfb8yQQtyjrLoDD9nCH17WltKC2qD9XnAV&u=" + name + "&roll=" + rollno;
+						window.location.replace(link);
+					}
+					else if (group === "EEE") {
+						link = "https://class.frat.team?r=jdC8xdX2JYMyJLgQVKOq&c=class&w=AI8n2ZO3GO4YHRbwgvYWq8LmTjnCwuTDpyIMMKgxU1Wcb4Y8NEW8qwGJ237gScdq1OqyehgO&j=AI8n2ZO3GO4YHRbwgvYWq8LmTjnCwuTDpyIMMKgxU1Wcb4Y8NEW8qwGJ237gScdq1OqyehgO&u=" + name + "&roll=" + rollno;
+						window.location.replace(link);
+					}
+					else if (group === "CIVIL") {
+						link = "https://class.frat.team?r=uQ1nL5aEPC9TzyBhXzUR&c=class&w=9s9aZqhlSq8OoztVDWC4lOg45EYlTE9MrPsqSKNN62Ni8ynV3KSSYMWiJAEFonmKC53q5ApV&j=9s9aZqhlSq8OoztVDWC4lOg45EYlTE9MrPsqSKNN62Ni8ynV3KSSYMWiJAEFonmKC53q5ApV&u=" + name + "&roll=" + rollno;
+						window.location.replace(link);
+					}
+					else if (group === "MECH") {
+						link = "https://class.frat.team?r=ogqOE0TR7xJZF8wm4Eg1&c=class&w=EmAqDEQzURGIrcRONGoZ0TZitTSybgEzJCfJ5H1PgoflQUI2ohXycal5xsnUU6w8ZZ4ThPQj&j=EmAqDEQzURGIrcRONGoZ0TZitTSybgEzJCfJ5H1PgoflQUI2ohXycal5xsnUU6w8ZZ4ThPQj&u=" + name + "&roll=" + rollno;
+						window.location.replace(link);
+					}
+					else {
+						window.location.replace("https://class.frat.team");
+					}
+				}
+
+				else if (year === "19") {
+					if (group === "CSE") {
+						link = "https://class.frat.team?r=jkKHvIwcOqzfcROT62xF&c=class&w=K8fYGLAT8GtR1jwCMYqlItJiociiYfVeZqOuAURroJ2JLoznd6MNT6JrJuG70jTobjOjvqws&j=K8fYGLAT8GtR1jwCMYqlItJiociiYfVeZqOuAURroJ2JLoznd6MNT6JrJuG70jTobjOjvqws&u=" + name + "&roll=" + rollno;
+						window.location.replace(link);
+					}
+					else if (group === "EEE") {
+						link = "https://class.frat.team?r=yAbzUQSAiNXl1YslKbTS&c=class&w=6dBVh7lYnaCpw8iT9LmW1kgBL8E5O9Th06x5p0jxx7ex4qNnQYbVDTy8OZOH594IBaBd02gS&j=6dBVh7lYnaCpw8iT9LmW1kgBL8E5O9Th06x5p0jxx7ex4qNnQYbVDTy8OZOH594IBaBd02gS&u=" + name + "&roll=" + rollno;
+						window.location.replace(link);
+					}
+					else if (group === "CIVIL") {
+						link = "https://class.frat.team?r=yzzrjTSSCFveNyE0VZ7n&c=class&w=FDLlYoBkYxWO8eFRIt2nZqFSv0L0XPLoTHkwAyHZcMdRw8EGa3C5st0INBg0K6LEUIciZu1F&j=FDLlYoBkYxWO8eFRIt2nZqFSv0L0XPLoTHkwAyHZcMdRw8EGa3C5st0INBg0K6LEUIciZu1F&u=" + name + "&roll=" + rollno;
+						window.location.replace(link);
+					}
+					else if (group === "MECH") {
+						link = "https://class.frat.team?r=vXtFGvwXbq9H7aXFSzIt&c=class&w=FDLlYoBkYxWO8eFRIt2nZqFSv0L0XPLoTHkwAyHZcMdRw8EGa3C5st0INBg0K6LEUIciZu1F&j=FDLlYoBkYxWO8eFRIt2nZqFSv0L0XPLoTHkwAyHZcMdRw8EGa3C5st0INBg0K6LEUIciZu1F&u=" + name + "&roll=" + rollno;
+						window.location.replace(link);
+					}
+					else {
+						window.location.replace("https://class.frat.team");
+					}
+				}
+				else {
+					window.location.replace("https://class.frat.team");
+				}
+			}
+			else if (user === "teacher") {
+				window.location.replace("https://frat.team/console");
+			}
+			else {
+				window.location.replace("https://frat.team");
+			}
+
+		}
+
+	</script>
+
+</body>
+
+</html>
