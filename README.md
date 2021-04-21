@@ -1,4 +1,4 @@
 # FRAT.TEAM
-### STATUS: Active development
+### STATUS: Archived
 This is the GitHub repo for the https://frat.team . 
-Currently in beta stage.
+
